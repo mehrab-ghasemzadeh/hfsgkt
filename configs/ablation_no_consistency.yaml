@@ -1,0 +1,3 @@
+extends: base.yaml
+stage2:
+  consistency_weight: 0.0

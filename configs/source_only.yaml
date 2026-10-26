@@ -1,0 +1,24 @@
+# No labeled target domain training/warmup; train graph head on source episodes.
+# Use stage1a checkpoint directly for Stage2 --init with this config.
+extends: base.yaml
+datasets:
+  CUB:
+    train_domain: miniImageNet
+    train_n_way: 5
+    warmup: false
+  ChestX:
+    train_domain: miniImageNet
+    train_n_way: 5
+    warmup: false
+  CropDisease:
+    train_domain: miniImageNet
+    train_n_way: 5
+    warmup: false
+  EuroSAT:
+    train_domain: miniImageNet
+    train_n_way: 5
+    warmup: false
+  ISIC:
+    train_domain: miniImageNet
+    train_n_way: 5
+    warmup: false

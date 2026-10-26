@@ -1,0 +1,4 @@
+extends: base.yaml
+model:
+  head:
+    alpha: 1.0

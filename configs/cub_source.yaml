@@ -1,0 +1,7 @@
+# Alternative experiment only; CUB source is not the standard miniImageNet benchmark.
+extends: base.yaml
+source: CUB
+targets: [Malaria, ChestX, CropDisease, EuroSAT, ISIC]
+datasets:
+  Malaria:
+    train_domain: CUB

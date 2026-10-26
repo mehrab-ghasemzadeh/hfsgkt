@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "cuda_available": true,
+  "torch": "2.9.0+cu128",
+  "tests": [
+    "dataset_audit",
+    "stage1a_forward_backward",
+    "stage1b_domain_alignment",
+    "stage2_both_heads",
+    "frozen_encoder_and_batchnorm",
+    "bitwise_resume",
+    "1shot_eval",
+    "5shot_eval"
+  ],
+  "synthetic_only": true,
+  "date": "2026-10-26",
+  "unit_tests": 16,
+  "inference_cli": "passed",
+  "verification_os": "Windows",
+  "linux_server_tested": false,
+  "real_dataset_training": false
+}

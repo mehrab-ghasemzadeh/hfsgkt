@@ -1,0 +1,130 @@
+# Run all commands from the project root. Paths below are examples to edit.
+seed: 42
+deterministic: true
+device: auto
+cpu_threads: 4
+num_workers: 4
+image_size: 84
+source: miniImageNet
+targets: [CUB, Malaria, ChestX, CropDisease, EuroSAT, ISIC]
+model:
+  d: 512
+  head:
+    hidden_dim: 512
+    num_heads: 4
+    num_layers: 3
+    k_neighbors: 8
+    dropout: 0.1
+    alpha: 0.5
+    residual_temperature: 10.0
+loss:
+  spectral_weight: 0.001
+  spectral_k: 5
+stage1a:
+  epochs: 100
+  batch_size: 128
+  lr: 0.1
+  min_lr: 0.001
+  weight_decay: 0.0005
+  max_batches: null
+  save_every: 10
+  output: checkpoints/stage1a
+  log_dir: runs/stage1a
+stage1b:
+  steps: 10000
+  source_batch_size: 128
+  target_batch_size: 32
+  lr: 0.001
+  weight_decay: 0.0005
+  step_size: 5000
+  gamma: 0.5
+  log_every: 100
+  save_every: 500
+  output: checkpoints/stage1b
+  log_dir: runs/stage1b
+stage2:
+  steps: 10000
+  lr: 0.001
+  weight_decay: 0.0
+  step_size: 5000
+  gamma: 0.5
+  n_query: 15
+  query_batch_size: 16
+  encode_batch_size: 128
+  mask_probability: 0.001
+  mse_weight: 1.0
+  consistency_weight: 1.0
+  ce_weight: 0.1
+  entropy_weight: 0.0
+  log_every: 100
+  save_every: 500
+  output: checkpoints/stage2
+  log_dir: runs/stage2
+evaluation:
+  episodes: 2000
+  n_query: 15
+  shots: [1, 5]
+  seed: 2026
+  query_batch_size: 16
+  encode_batch_size: 128
+  output: results
+# These are CUSTOM illustrative class splits. Supply audited published manifests
+# for benchmark comparisons. Class counts are checked, never silently reduced.
+datasets:
+  miniImageNet:
+    root: /srv/datasets/miniImageNet
+    split_policy: class_disjoint
+    splits:
+      train: data/manifests/miniImageNet/train.csv
+      val: data/manifests/miniImageNet/val.csv
+      test: null
+  CUB:
+    root: /srv/datasets/CUB_200_2011
+    split_policy: class_disjoint
+    n_way: 5
+    train_n_way: 5
+    splits:
+      train: data/manifests/CUB/train.csv
+      test: data/manifests/CUB/test.csv
+  Malaria:
+    root: /srv/datasets/cell_images
+    split_policy: class_disjoint
+    n_way: 2
+    train_n_way: 2
+    train_domain: miniImageNet
+    warmup: false
+    splits:
+      test: data/manifests/Malaria/test.csv
+  ChestX:
+    root: /srv/datasets/chestx
+    split_policy: class_disjoint
+    n_way: 5
+    train_n_way: 2
+    splits:
+      train: data/manifests/ChestX/train.csv
+      test: data/manifests/ChestX/test.csv
+  CropDisease:
+    root: /srv/datasets/cropdisease
+    split_policy: class_disjoint
+    n_way: 5
+    train_n_way: 5
+    splits:
+      train: data/manifests/CropDisease/train.csv
+      test: data/manifests/CropDisease/test.csv
+  EuroSAT:
+    root: /srv/datasets/EuroSAT/2750
+    split_policy: class_disjoint
+    n_way: 5
+    train_n_way: 5
+    splits:
+      train: data/manifests/EuroSAT/train.csv
+      test: data/manifests/EuroSAT/test.csv
+  ISIC:
+    # User supplied skin-cancer9-classesisic, NOT automatically ISIC2018 benchmark.
+    root: /srv/datasets/skin-cancer9/Train
+    split_policy: class_disjoint
+    n_way: 5
+    train_n_way: 4
+    splits:
+      train: data/manifests/ISIC/train.csv
+      test: data/manifests/ISIC/test.csv

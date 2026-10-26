@@ -1,0 +1,7 @@
+# Install the CUDA-specific torch wheels first using scripts/install_server.sh.
+torch==2.9.0
+torchvision==0.24.0
+numpy>=1.24,<3
+Pillow>=10,<13
+PyYAML>=6,<7
+tensorboard>=2.14,<3

@@ -1,0 +1,8 @@
+# Exact direct dependency versions used for local verification.
+# Install torch/torchvision from the CUDA 12.8 index as in install_server.sh.
+torch==2.9.0
+torchvision==0.24.0
+numpy==2.2.6
+Pillow==10.3.0
+PyYAML==6.0.2
+tensorboard==2.20.0

@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kt-gnn-hybrid"
+version = "0.1.0"
+description = "Research implementation of hybrid mid-level features and graph knowledge transduction for CDFSL"
+requires-python = ">=3.10"
+dependencies = ["torch==2.9.0", "torchvision==0.24.0", "numpy>=1.24,<3", "Pillow>=10,<13", "PyYAML>=6,<7", "tensorboard>=2.14,<3"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["models*", "data_loaders*", "losses*", "train*", "eval*", "utils*", "scripts*"]
+exclude = ["tests*"]
